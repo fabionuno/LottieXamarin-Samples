@@ -27,7 +27,7 @@ namespace LottieSamples.iOS
             this.View.AddSubview(this.lottieLogo);
 
             this.lottieButton = new UIButton(UIButtonType.Custom);
-            this.lottieButton.AddTarget((sender, e) => { }, UIControlEvent.TouchUpInside);
+            this.lottieButton.AddTarget((sender, e) => { PlayLottieAnimation(); }, UIControlEvent.TouchUpInside);
             this.View.AddSubview(lottieButton);
 
             this.tableView = new UITableView(CGRect.Empty, UITableViewStyle.Plain);
@@ -86,12 +86,9 @@ namespace LottieSamples.iOS
 
             public TableSource()
             {
-                //this.listItems.Add(new Tuple<string, string>("Animation Explorer", "AnimationExplorerViewController"));
+                this.listItems.Add(new Tuple<string, Type >("Animation Explorer", typeof(AnimationExplorerViewController)));
                 //this.listItems.Add(new Tuple<string, string>("Animated Keyboard", "AnimationExplorerViewController"));
                 this.listItems.Add(new Tuple<string, Type>("Animated Transitions Demo", typeof(AnimationTransitionViewController)));
-
-                //this.listItems.Add("Animated Keyboard", "TypingDemoViewController");
-                //this.listItems.Add("Animated Transitions Demo", "AnimationTransitionViewController");
             }
 
 

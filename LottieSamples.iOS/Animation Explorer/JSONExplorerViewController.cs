@@ -6,6 +6,9 @@ namespace LottieSamples.iOS
 {
     public partial class JSONExplorerViewController : UIViewController
     {
+
+        public Action<string> CompletionBlock;
+
         private UITableView tableView;
         private string[] jsonFiles;
 
@@ -44,12 +47,18 @@ namespace LottieSamples.iOS
 
         private void ClosePressed()
         {
-            //if (this.com
+            if (this.CompletionBlock != null)
+            {
+                this.CompletionBlock(null);
+            }
         }
 
-        private void Source_ItemSelected(object sender, string e)
+        private void Source_ItemSelected(object sender, string fileName)
         {
-
+            if (this.CompletionBlock != null)
+            {
+                this.CompletionBlock(fileName);
+            }
         }
 
 
@@ -79,15 +88,14 @@ namespace LottieSamples.iOS
                 //{
                 //    cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
                 //}
-                var fileComponents = this.jsonFiles[indexPath.Row].Split('/');
-                cell.TextLabel.Text = fileComponents[fileComponents.Length-1];
+                cell.TextLabel.Text = System.IO.Path.GetFileName(this.jsonFiles[indexPath.Row]);
                 return cell;
 
             }
 
             public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
             {
-                this.ItemSelected?.Invoke(null, this.jsonFiles[indexPath.Row]);
+                this.ItemSelected?.Invoke(null, System.IO.Path.GetFileName(this.jsonFiles[indexPath.Row]));
                 tableView.DeselectRow(indexPath, animated: true);
             }
         }
