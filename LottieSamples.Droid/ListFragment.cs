@@ -59,10 +59,6 @@ namespace LottieSamples.Droid
             {
                 this.StartActivity(new Intent(this.Context, typeof(FontActivity)));
             }
-            else
-            {
-                this.StartActivity(new Intent(this.Context, typeof(AppIntroActivity)));
-            }
         }
 
         private void ShowFragment(Fragment fragment)
